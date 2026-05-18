@@ -1,5 +1,6 @@
 package com.juliodev.ecommerce.exceptions;
 
+import com.juliodev.ecommerce.payload.APIResponse;
 import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,14 +27,18 @@ public class MyGlobalExceptionHandler {
     }
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<String> myResourceNotFoundException(ResourceNotFoundException ex){
-        String message = ex.getMessage();
-        return new ResponseEntity<>(message,HttpStatus.NOT_FOUND);
+    public ResponseEntity<APIResponse> myResourceNotFoundException(ResourceNotFoundException ex){
+        APIResponse response = new APIResponse();
+        response.setMessage(ex.getMessage());
+        response.setStatus(false);
+        return new ResponseEntity<>(response,HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(APIException.class)
-    public ResponseEntity<String> myAPIException(APIException ex){
-        String message = ex.getMessage();
-        return new ResponseEntity<>(message,HttpStatus.BAD_REQUEST);
+    public ResponseEntity<APIResponse> myAPIException(APIException ex){
+        APIResponse response = new APIResponse();
+        response.setMessage(ex.getMessage());
+        response.setStatus(false);
+        return new ResponseEntity<>(response,HttpStatus.BAD_REQUEST);
     }
 }
