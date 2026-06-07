@@ -1,3 +1,9 @@
+variable "aws_profile" {
+  description = "AWS Profile"
+  type        = string
+  default     = "terraform"
+}
+
 variable "db_name" {
   type = string
 }

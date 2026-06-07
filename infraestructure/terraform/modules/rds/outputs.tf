@@ -1,7 +1,3 @@
-output "rds_endpoint" {
-  value = aws_db_instance.postgres.endpoint
-}
-
-output "rds_address" {
+output "endpoint" {
   value = aws_db_instance.postgres.address
 }
