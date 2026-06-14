@@ -4,11 +4,13 @@ import com.juliodev.ecommerce.payload.OrderDTO;
 import com.juliodev.ecommerce.payload.OrderRequestDTO;
 import com.juliodev.ecommerce.service.OrderService;
 import com.juliodev.ecommerce.util.AuthUtil;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@Tag(name="Order API", description = "Order management endpoints for apply purchases in the e-commerce app")
 @RestController
 @RequestMapping("/api")
 public class OrderController {

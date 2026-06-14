@@ -4,6 +4,7 @@ import com.juliodev.ecommerce.model.User;
 import com.juliodev.ecommerce.payload.AddressDTO;
 import com.juliodev.ecommerce.service.AddressService;
 import com.juliodev.ecommerce.util.AuthUtil;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Tag(name="Address API", description = "Address endpoints for save shipping addresses in the e-commerce app")
 @RestController
 @RequestMapping("/api")
 public class AddressController {

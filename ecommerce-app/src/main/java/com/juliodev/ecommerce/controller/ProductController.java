@@ -5,6 +5,7 @@ import com.juliodev.ecommerce.config.AppConstants;
 import com.juliodev.ecommerce.payload.ProductDTO;
 import com.juliodev.ecommerce.payload.ProductResponse;
 import com.juliodev.ecommerce.service.ProductService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/api")
+@Tag(name="Product API", description = "Product management endpoints for the e-commerce app")
 public class ProductController {
     @Autowired
     ProductService productService;

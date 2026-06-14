@@ -11,6 +11,7 @@ import com.juliodev.ecommerce.security.request.SignupRequest;
 import com.juliodev.ecommerce.security.response.MessageResponse;
 import com.juliodev.ecommerce.security.response.UserInfoResponse;
 import com.juliodev.ecommerce.security.services.UserDetailsImpl;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -32,6 +33,7 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Tag(name="Auth API", description = "Security endpoints for the e-commerce app")
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
