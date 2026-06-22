@@ -6,6 +6,8 @@ import About from './components/About/About'
 import Contact from './components/Contact/Contact'
 import Team from './components/Team/Team'
 import NotFound from './components/NotFound/NotFound'
+import CurrentLocation from './components/CurrentLocation/CurrentLocation'
+import Dashboard from './components/Dashboard/Dashboard'
 
 function App() {
   return (
@@ -23,6 +25,7 @@ function App() {
             to="/contact">Contact</Link></li>
           </ul>
         </nav>
+        <CurrentLocation/>
         <div className='container mx-auto py-8'>
           <Routes>
             <Route path='/' element={<Home/>}/>
@@ -30,6 +33,7 @@ function App() {
               <Route path='team' element={<Team/>}/>
             </Route>
             <Route path='/contact' element={<Contact/>}/>
+            <Route path='/dashboard' element={<Dashboard/>}/>
             <Route path='*' element={<NotFound/>}/>
           </Routes>
         </div>
