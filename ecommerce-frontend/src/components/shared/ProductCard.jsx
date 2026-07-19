@@ -13,6 +13,7 @@ const ProductCard = ({
     price,
     discount,
     specialPrice,
+    about = false
 }) => {
     const [openProductViewModal, setOpenProductViewModal] = useState(false);
     const btnLoader = false;
@@ -21,8 +22,10 @@ const ProductCard = ({
 
     //takes the product selected and open the modal for show the details
     const handleProductView = (product) => {
-        setSelectedViewProduct(product)
-        setOpenProductViewModal(true);
+        if(!about){
+            setSelectedViewProduct(product)
+            setOpenProductViewModal(true);
+        }
     }
 
     return (
@@ -58,36 +61,39 @@ const ProductCard = ({
                 <div className="min-h-20 max-h-20 text-s">
                     <p className="text-gray-600 text-sm">{truncateText(description,80)}</p>
                 </div>
-                <div className="flex items-center justify-between">
-                    {
-                        specialPrice ? (
-                            <div className="flex flex-col">
-                                <span className="text-gray-400 line-through">
-                                    ${Number(price).toFixed(2)}
-                                </span>
-                                <span className="text-xl font-bold text-slate-700">
-                                    ${Number(specialPrice).toFixed(2)}
-                                </span>
-                            </div>
-                        ) : (
-                            <div className="flex flex-col">
-                                <span className="text-xl font-bold text-slate-700">
-                                    {"    "}
-                                    ${Number(price).toFixed(2)}
-                                </span>
-                            </div>
-                        )
-                    }
-                </div>
-                <Divider />
-                
-                <button 
-                    disabled={!isAvailable || btnLoader}
-                    onClick={()=>{}}
-                    className={`bg-blue-500 ${isAvailable ? "opacity-100 hover:bg-blue-600" : "opacity-70"} text-white py-2 px-3 rounded-lg items-center transition-colors duration-300 w-36 flex justify-center`}>
-                    <FaShoppingCart/>
-                    { isAvailable ? "Add to Cart": "Stock out"}
-                </button>
+                {!about && (
+                    <div className="flex items-center justify-between">
+                        {
+                            specialPrice ? (
+                                <div className="flex flex-col">
+                                    <span className="text-gray-400 line-through">
+                                        ${Number(price).toFixed(2)}
+                                    </span>
+                                    <span className="text-xl font-bold text-slate-700">
+                                        ${Number(specialPrice).toFixed(2)}
+                                    </span>
+                                </div>
+                            ) : (
+                                <div className="flex flex-col">
+                                    <span className="text-xl font-bold text-slate-700">
+                                        {"    "}
+                                        ${Number(price).toFixed(2)}
+                                    </span>
+                                </div>
+                            )
+                        }
+                    
+                        <Divider />
+                        
+                        <button 
+                            disabled={!isAvailable || btnLoader}
+                            onClick={()=>{}}
+                            className={`bg-blue-500 ${isAvailable ? "opacity-100 hover:bg-blue-600" : "opacity-70"} text-white py-2 px-3 rounded-lg items-center transition-colors duration-300 w-36 flex justify-center`}>
+                            <FaShoppingCart/>
+                            { isAvailable ? "Add to Cart": "Stock out"}
+                        </button>
+                    </div>)
+                }
             </div>
 
             <ProductViewModal 
