@@ -10,7 +10,6 @@ import 'swiper/css/effect-fade';
 import 'swiper/css/autoplay';
 
 const colors = ["bg-banner-color1", "bg-banner-color2", "bg-banner-color3"];
-console.log(bannerList)
 const HeroBanner = () => {
     return (
         <div className='py-2 rounded-md'>
