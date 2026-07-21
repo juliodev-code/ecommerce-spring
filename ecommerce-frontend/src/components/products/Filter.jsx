@@ -130,5 +130,3 @@ const Filter = ({categories}) => {
 }
 
 export default Filter;
-
-//https://github.com/EmbarkXOfficial/spring-boot-course/commits/main/?after=ecae1cad6af4eae5bceff1b35316181097f738df+104
