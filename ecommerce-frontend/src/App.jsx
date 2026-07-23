@@ -9,6 +9,9 @@ import Navbar from './components/shared/Navbar'
 import About from './components/about/About'
 import Contact from './components/contact/Contact'
 import Cart from './components/cart/Cart'
+import LoginPage from './components/auth/LoginPage'
+import PrivateRoute from './components/PrivateRoute'
+import Register from './components/auth/Register'
 
 
 
@@ -24,6 +27,10 @@ function App() {
           <Route path="/about" element={<About/>}/>
           <Route path="/contact" element={<Contact/>}/>
           <Route path="/cart" element={<Cart/>}/>
+          <Route path="/" element={<PrivateRoute publicPage />}>
+            <Route path='/login' element={ <LoginPage />}/>
+            <Route path='/register' element={ <Register />}/>
+          </Route>
         </Routes>
       </Router>
       <Toaster position='botton-center'/>
