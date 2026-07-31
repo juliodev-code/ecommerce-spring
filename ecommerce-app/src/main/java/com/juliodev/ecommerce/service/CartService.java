@@ -2,6 +2,7 @@ package com.juliodev.ecommerce.service;
 
 import com.juliodev.ecommerce.model.Cart;
 import com.juliodev.ecommerce.payload.CartDTO;
+import com.juliodev.ecommerce.payload.CartItemsDTO;
 import jakarta.transaction.Transactional;
 
 import java.util.List;
@@ -16,4 +17,5 @@ public interface CartService {
     @Transactional
     String deleteProductFromCart(Long cartId, Long productId);
     void updateProductInCarts(Long cartId, Long productId);
+    String createOrUpdateCartWithItems(List<CartItemsDTO> cartItems);
 }

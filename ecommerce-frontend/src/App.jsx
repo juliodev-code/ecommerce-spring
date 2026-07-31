@@ -12,6 +12,7 @@ import Cart from './components/cart/Cart'
 import LoginPage from './components/auth/LoginPage'
 import PrivateRoute from './components/PrivateRoute'
 import Register from './components/auth/Register'
+import Checkout from './components/checkout/Checkout'
 
 
 
@@ -27,6 +28,13 @@ function App() {
           <Route path="/about" element={<About/>}/>
           <Route path="/contact" element={<Contact/>}/>
           <Route path="/cart" element={<Cart/>}/>
+        
+          {/* Session pages  */}
+          <Route path="/" element={<PrivateRoute/>}>
+             <Route path="/checkout" element={<Checkout/>}/>
+          </Route>
+
+          {/* Public pages  */}
           <Route path="/" element={<PrivateRoute publicPage />}>
             <Route path='/login' element={ <LoginPage />}/>
             <Route path='/register' element={ <Register />}/>
