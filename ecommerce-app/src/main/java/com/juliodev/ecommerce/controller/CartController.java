@@ -2,6 +2,7 @@ package com.juliodev.ecommerce.controller;
 
 import com.juliodev.ecommerce.model.Cart;
 import com.juliodev.ecommerce.payload.CartDTO;
+import com.juliodev.ecommerce.payload.CartItemsDTO;
 import com.juliodev.ecommerce.service.CartService;
 import com.juliodev.ecommerce.util.AuthUtil;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -21,6 +22,12 @@ public class CartController {
 
     @Autowired
     private AuthUtil authUtil;
+
+    @PostMapping("/cart/create")
+    public ResponseEntity<String> createOrUpdateCart(@RequestBody List<CartItemsDTO> cartItems){
+        String response = cartService.createOrUpdateCartWithItems(cartItems);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
 
     @PostMapping("/carts/products/{productId}/quantity/{quantity}")
     public ResponseEntity<CartDTO>addProductToCart(@PathVariable Long productId, @PathVariable Integer quantity){
