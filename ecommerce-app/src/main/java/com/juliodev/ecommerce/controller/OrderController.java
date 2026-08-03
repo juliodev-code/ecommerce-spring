@@ -2,8 +2,12 @@ package com.juliodev.ecommerce.controller;
 
 import com.juliodev.ecommerce.payload.OrderDTO;
 import com.juliodev.ecommerce.payload.OrderRequestDTO;
+import com.juliodev.ecommerce.payload.StripePaymentDTO;
 import com.juliodev.ecommerce.service.OrderService;
+import com.juliodev.ecommerce.service.StripeService;
 import com.juliodev.ecommerce.util.AuthUtil;
+import com.stripe.exception.StripeException;
+import com.stripe.model.PaymentIntent;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +24,9 @@ public class OrderController {
 
     @Autowired
     private AuthUtil authUtil;
+
+    @Autowired
+    private StripeService stripeService;
 
     @PostMapping("/order/users/payments/{paymentMethod}")
     public ResponseEntity<OrderDTO>orderProducts(@PathVariable String paymentMethod,
@@ -38,4 +45,12 @@ public class OrderController {
 
         return new ResponseEntity<OrderDTO>(order, HttpStatus.CREATED);
     }
+
+    @PostMapping("/order/stripe-client-secret")
+    public ResponseEntity<String> createStripeClientSecret(@RequestBody StripePaymentDTO stripePaymentDto) throws StripeException {
+        System.out.println("StripePaymentDTO Received " + stripePaymentDto);
+        PaymentIntent paymentIntent = stripeService.paymentIntent(stripePaymentDto);
+        return new ResponseEntity<>(paymentIntent.getClientSecret(), HttpStatus.CREATED);
+    }
+
 }
