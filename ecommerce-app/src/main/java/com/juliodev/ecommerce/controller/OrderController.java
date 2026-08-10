@@ -1,8 +1,7 @@
 package com.juliodev.ecommerce.controller;
 
-import com.juliodev.ecommerce.payload.OrderDTO;
-import com.juliodev.ecommerce.payload.OrderRequestDTO;
-import com.juliodev.ecommerce.payload.StripePaymentDTO;
+import com.juliodev.ecommerce.config.AppConstants;
+import com.juliodev.ecommerce.payload.*;
 import com.juliodev.ecommerce.service.OrderService;
 import com.juliodev.ecommerce.service.StripeService;
 import com.juliodev.ecommerce.util.AuthUtil;
@@ -51,6 +50,24 @@ public class OrderController {
         System.out.println("StripePaymentDTO Received " + stripePaymentDto);
         PaymentIntent paymentIntent = stripeService.paymentIntent(stripePaymentDto);
         return new ResponseEntity<>(paymentIntent.getClientSecret(), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/admin/orders")
+    public ResponseEntity<OrderResponse> getAllOrders(
+            @RequestParam(name = "pageNumber", defaultValue = AppConstants.PAGE_NUMBER, required = false) Integer pageNumber,
+            @RequestParam(name = "pageSize", defaultValue = AppConstants.PAGE_SIZE, required = false) Integer pageSize,
+            @RequestParam(name = "sortBy", defaultValue = AppConstants.SORT_ORDERS_BY, required = false) String sortBy,
+            @RequestParam(name = "sortOrder", defaultValue = AppConstants.SORT_DIR, required = false) String sortOrder
+    ) {
+        OrderResponse orderResponse = orderService.getAllOrders(pageNumber, pageSize, sortBy, sortOrder);
+        return new ResponseEntity<OrderResponse>(orderResponse, HttpStatus.OK);
+    }
+
+    @PutMapping("/admin/orders/{orderId}/status")
+    public ResponseEntity<OrderDTO> updateOrderStatus(@PathVariable Long orderId,
+                                                      @RequestBody OrderStatusUpdateDTO orderStatusUpdateDto) {
+        OrderDTO order = orderService.updateOrder(orderId, orderStatusUpdateDto.getStatus());
+        return new ResponseEntity<OrderDTO>(order, HttpStatus.OK);
     }
 
 }
