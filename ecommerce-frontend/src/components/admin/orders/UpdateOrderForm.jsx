@@ -2,7 +2,7 @@ import { Button, FormControl, FormHelperText, InputLabel, MenuItem, Select } fro
 import React, { useState } from 'react'
 import { FaSpinner } from 'react-icons/fa';
 import Spinners from '../../shared/Spinners';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
 import { updateOrderStatusFromDashboard } from '../../../store/actions';
 
@@ -19,6 +19,8 @@ const UpdateOrderForm = ({ setOpen, selectedId, selectedItem, loader, setLoader}
     const [orderStatus, setOrderStatus] = useState(selectedItem?.status || 'Accepted');
     const [error, setError] = useState("");
     const dispatch = useDispatch();
+    const { user } = useSelector((state) => state.auth);
+    const isAdmin = user && user?.roles?.includes("ROLE_ADMIN");
 
     const updateOrderStatus = (e) => {
         e.preventDefault();
@@ -30,7 +32,8 @@ const UpdateOrderForm = ({ setOpen, selectedId, selectedItem, loader, setLoader}
             selectedId,
             orderStatus,
             toast,
-            setLoader
+            setLoader,
+            isAdmin
         ));
     }
 
