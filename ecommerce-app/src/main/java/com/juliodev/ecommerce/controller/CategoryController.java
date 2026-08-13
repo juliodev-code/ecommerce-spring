@@ -17,14 +17,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/public/categories")
+@RequestMapping("/api")
 @Tag(name="Category API", description = "Endpoints to manage Categories for classify products")
 public class CategoryController {
 
     @Autowired
     private CategoryService categoryService;
 
-    @GetMapping()
+    @GetMapping("/public/categories")
     @Operation(summary="List All Categories",
             description = "Endpoint to show all categories registered into Ecommerce application")
     public ResponseEntity<CategoryResponse> getAllCategories(
@@ -35,7 +35,7 @@ public class CategoryController {
         return new ResponseEntity<>(categoryService.getAllCategories(pageNumber,pageSize, sortBy, sortOrder), HttpStatus.OK);
     }
 
-    @PostMapping()
+    @PostMapping("/admin/categories")
     @ApiResponses({
             @ApiResponse(responseCode = "201",description = "Category was created successfully"),
             @ApiResponse(responseCode = "400",description = "Invalid Input", content = @Content),
@@ -45,14 +45,14 @@ public class CategoryController {
         return new ResponseEntity<>(categoryService.createCategory(category), HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/{categoryId}")
+    @DeleteMapping("/admin/categories/{categoryId}")
     public ResponseEntity<CategoryDTO> deleteCategory(
             @Parameter(description = "Category Id reference that you wish to delete")
             @PathVariable Long categoryId){
         return new ResponseEntity<>(categoryService.deleteCategory(categoryId), HttpStatus.OK);
     }
 
-    @PutMapping("/{categoryId}")
+    @PutMapping("/admin/categories/{categoryId}")
     ResponseEntity<CategoryDTO>updateCategory(@Valid @RequestBody CategoryDTO categoryDTO, @PathVariable Long categoryId){
         return new ResponseEntity<>(categoryService.updateCategory(categoryDTO, categoryId), HttpStatus.OK);
     }
