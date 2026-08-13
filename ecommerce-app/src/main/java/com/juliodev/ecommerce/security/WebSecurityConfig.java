@@ -72,7 +72,7 @@ public class WebSecurityConfig {
                                 .requestMatchers("/h2-console/**").permitAll()
                                 .requestMatchers("/api/admin/**").hasRole("ADMIN")
                                 .requestMatchers("/api/seller/**").hasAnyRole("ADMIN","SELLER")
-                                .requestMatchers("/api/public/**").hasRole("USER")
+                                .requestMatchers("/api/public/**").permitAll()
                                 .requestMatchers("/swagger-ui/**").permitAll()
                                 .requestMatchers("/api/test/**").permitAll()
                                 .requestMatchers("/images/**").permitAll()
